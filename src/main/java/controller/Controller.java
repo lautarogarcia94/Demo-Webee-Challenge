@@ -1,32 +1,41 @@
 package controller;
 
+import HTTPrequest.RequestDevice;
+
 public class Controller {
+g
 
+    private RequestDevice requestDevice;
 
+    public Controller() {
+        requestDevice = new RequestDevice();
+    }
 
     public String insertDevice(String date, String macAddress) {
-        System.out.println("Registering a device with date: "+date+" and MAC address: "+macAddress);
-        return "Registering a device with date: "+date+" and MAC address: "+macAddress;
-
+        int requestResponse = requestDevice.postDevice(date, macAddress);
+        if (requestResponse == 201)
+            return "Device inserted correctly";
+        else
+            return "An error happened while inserting the device";
     }
 
     public String getListDevice() {
-        System.out.println("\n"+"The list of saved devices is:");
-        return "The list of saved devices is:";
+        return requestDevice.getAllDevices();
     }
 
     public String getDeviceByMac(String macAddress) {
-        System.out.println("Looking for a device with MAC address: "+ macAddress);
-        return "Looking for a device with MAC address: "+ macAddress;
+        return requestDevice.getDeviceByMac(macAddress);
     }
 
     public String getDeviceById(String id) {
-        System.out.println("Looking for a device with ID: "+ id);
-        return "Looking for a device with ID: "+ id;
+        return requestDevice.getDeviceById(id);
     }
 
     public String deleteDeviceById(String id) {
-        System.out.println("Deleting a device with ID: "+ id);
-        return "Deleting a device with ID: "+ id;
+        int requestResponse = requestDevice.deleteDeviceById(id);
+        if (requestResponse == 200)
+            return "Device deleted correctly";
+        else
+            return "An error happened while deleting the device";
     }
 }
