@@ -3,7 +3,7 @@ package controller;
 import HTTPrequest.RequestDevice;
 
 public class Controller {
-g
+
 
     private RequestDevice requestDevice;
 
